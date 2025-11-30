@@ -1,19 +1,194 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html lang="de">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Meine Website</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Bärenhard Taekwondo </title>
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
+
 </head>
 <body>
-   <h1>Links zu Seiten</h1>
-    <a href="https://www.instagram.com/s.ypva_/">Mein Insta Link:</a>
-    <br>
-     <a href="https://www.baerenhart.at/BAeRENHART-TAEKWONDO/">Mein Verein</a>
+<header class="navbar">
+  <div class="navbar-content">
+
+    <!-- Linkes Logo + Titel -->
+    <div class="left-section">
+      <img src="Bilder/Herunterladen.webp" alt="Bärenhart Taekwondo Logo" class="logo-left" >
+      <span class="brand">Bärenhart Taekwondo</span>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="nav-links">
+      <a href="https://www.google.com/maps/place/Judenburgerstra%C3%9Fe+21,+3500+Krems+an+der+Donau/@48.4160232,15.6375668,17z/data=!3m1!4b1!4m6!3m5!1s0x477283802dc50a91:0xbefe0ce7e1cd1830!8m2!3d48.4160232!4d15.6401417!16s%2Fg%2F11hdc4y83v?entry=ttu&g_ep=EgoyMDI1MTEyMy4xIKXMDSoASAFQAw%3D%3D">Ort</a>
+      <a href="https://de.wikipedia.org/wiki/Taekwondo">Was ist TKD?</a>
+      <a href="https://www.baerenhart.at/KONTAKT/">Kontakt</a>
+    </nav>
+
+    <!-- Rechtes Logo -->
+    <div class="right-section">
+      <img src="Bilder/OIP (1).webp" alt="Austrian Taekwondo Federation Logo" class="logo-right">
+    </div>
+
+  </div>
+</header>
+
+  <!-- Hero / Einleitung -->
+  <section class="hero">
+    <div class="hero-content">
+      <p class="lead blauer-text">Kurzinfo: Training, Werte & Spaß — für Kleinkinder, Kinder, Jugendliche & Erwachsene.</p>
+      <center><h1 class="blauer-text">TKD für jedes Alter</h1></center>
+      <p class="hero-underline"></p>
+    </div>
+  </section>
+
+  <!-- Drei Boxen: Kleinkinder | Kinder | Jugendliche & Erwachsene -->
+  <main>
+    <section class="cards" id="trainings">
+      <div class="card">
+        <center>
+        <h2 class="blauer-text">Kleinkinder:</h2>
+        <p> <h2 class="blauer-text">Sanfte Einführung, Motorik & Spaß.</h2></p>
+        </center>
+      </div>
+      <div class="card">
+        <center>
+        <h2 class="blauer-text">Kinder:</h2>
+        <p><h2 class="blauer-text">Technik, Disziplin & Teamgeist.</h2></p>
+        </center> 
+      </div>
+      <div class="card">
+        <center>
+        <h2 class="blauer-text">Jugendliche &amp; Erwachsene:</h2>
+        <p><h2 class="blauer-text">Kondition, Selbstverteidigung & Wettkampf.</h2></p>
+        </center>
+      </div>
+    </section>
+
+    <!-- Für wen ist TKD geeignet? -->
+    <section class="who" id="was-ist">
+      <center>
+      <h2 class="blauer-text">Für wen ist TKD geeignet?</h2>
+      <ul class="who-list">
+           <h2 class="blauer-text"> Alter, Geschlecht oder Fitnesslevel spielen keine Rolle - das Einzige, was zählt, ist die Freude an der Bewegung! Taekwondo ist für jeden geeignet, der Lust hat,
+          <br> etwas Neues zu lernen und sich körperlich sowie mental weiterzuentwickeln. Niemand muss perfekt sein, um anzufangen - der Fortschritt kommt mit dem Üben.
+          <br> Wer sich Zeit gibt und dranbleibt, wird schnell merken: Es ist noch kein Meister vom Himmel gefallen! Unser oberstes Ziel ist die Gesundheit von Körper und Geist. 
+          <br>Die Techniken werden mit leichtem Kontakt ausgeführt, um Verletzungen zu vermeiden. Dabei geht es darum, Geschwindigkeit, Kraft und Kontrolle in Einklang zu bringen.
+          <br>Jede Trainingseinheit fördert Koordination, Kondition, Flexibilität und Konzentration - einseitige Belastung gibt es bei uns nicht!
+          <br>Dieses ganzheitliche Bewegungskonzept verbessert nicht nur die Motorik, sondern stärkt auch die mentale Widerstandskraft. Taekwondo hilft, sich besser zu fokussieren und Ängste zu überwinden.</li>
+        </h2>
+        </center>
+        </ul>
+    </section>
+  </main>
+
+  <!-- Footer / Kontaktbereich -->
+  <footer id="kontakt" class="footer">
+    <div class="footer-inner">
+      <div class="contact-box">
+        <h3 class="blauer-text">Kontakt</h3>
+        <p class="blauer-text"><strong>Adresse:</strong><br/>Judenburgerstraße 21<br/>Krems-Lerchenfeld</p>
+        <p class="blauer-text"><strong>Nummer:</strong><br/>0664 7515 6715</p>
+        <p class="blauer-text"><strong>Mail:</strong><br/><a href="info@baerenhart.at ">info@baerenhart.at </a></p>
+    
+      <div class="logos">
+        <img src="Bilder/European-Taekwondo-Union-600x338.png" alt="ETC Logo" class="logo-bottom" width="200px">
+        <img src="Bilder/Herunterladen.webp" alt="Bärenhart Taekwondo Logo" class="logo-bottom" width="300px">
+        <img src="Bilder/logo-bundes-sport-gmbh-250x.jpg" alt="BSGmbH Logo" class="logo-bottom" width="350px">
+    </div>
+    </div>
+    <p class="copyright">© <span id="year"></span> Bärenhart Taekwondo</p>
+  </footer>
+
+  <script>
+    // Jahr automatisch ausfüllen
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+
+
+
+  <style>
+    .blauer-text {
+    color: rgb(247, 240, 240);         /* Schriftfarbe */
+    background-color: rgb(0, 0, 0); /* Hintergrundfarbe */
+    padding: 5px 10px;   /* Abstand um den Text herum */
+    border-radius: 4px;  /* optional: abgerundete Ecken */
+    display: inline-block; /* damit der Hintergrund nur den Text umschließt */
+}
+    /* Rote Navbar */
+.navbar {
+  background: #c21111;
+  color: #fff;
+  padding: 14px 0;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.navbar-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+
+/* Linke Seite: Logo + Titel */
+.left-section {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.logo-left {
+  height: 100px;     /* anpassbar */
+  width: auto;
+}
+
+.brand {
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  color: #fff;
+}
+
+/* Navigation */
+.nav-links a {
+  color: white;
+  text-decoration: none;
+  margin: 0 12px;
+  font-weight: 500;
+}
+
+.nav-links a:hover {
+  text-decoration: underline;
+}
+
+/* Rechtes Logo */
+.right-section {
+  display: flex;
+  align-items: center;
+}
+
+.logo-right {
+  height: 100px;     /* etwas kleiner */
+  width: auto;
+}
+
+body {
+        /* Bildpfad anpassen */
+        background-image: url('Bilder/Bild.jpeg');
+        background-size: cover 
+        background-position: center;  /* Zentrieren */
+        background-attachment: fixed; /* Bild bleibt beim Scrollen fixiert */
+
+    }
+
+  </style>
 </body>
-
 </html>
-
-
-
-
