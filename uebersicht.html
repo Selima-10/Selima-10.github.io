@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Übersicht - Taekwondo Anmeldungen</title>
+    <link rel="stylesheet" href="uebersicht.css">
+</head>
+<body>
+
+    <div class="container">
+        <h1>📋 Taekwondo Anmeldungen</h1>
+        <p class="subtitle">Alle eingetragenen Teilnehmer im Überblick</p>
+
+        <div class="statistik">
+            <div class="stat-box">
+                <div class="stat-zahl" id="gesamtAnzahl">0</div>
+                <div class="stat-label">Gesamt</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-zahl" id="poomsaeAnzahl">0</div>
+                <div class="stat-label">Poomsae</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-zahl" id="kyorugiAnzahl">0</div>
+                <div class="stat-label">Kyorugi</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-zahl" id="schwarzAnzahl">0</div>
+                <div class="stat-label">Schwarzgurte</div>
+            </div>
+        </div>
+
+        <div class="buttons">
+            <a href="Anmeldung.html" class="btn btn-primary">➕ Neue Anmeldung</a>
+            <button class="btn btn-danger" onclick="alleLoeschen()">🗑️ Alle löschen</button>
+        </div>
+
+        <div class="tabelle-container" id="tabelleContainer">
+            <table id="anmeldungenTabelle">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Geschlecht</th>
+                        <th>Geburtstag</th>
+                        <th>Disziplin</th>
+                        <th>Gewicht</th>
+                        <th>Gürtel</th>
+                        <th>Verein</th>
+                        <th>Löschen</th>
+                    </tr>
+                </thead>
+                <tbody id="tabelleBody">
+                </tbody>
+            </table>
+        </div>
+
+        <div class="karten-liste" id="kartenContainer">
+        </div>
+    </div>
+
+    <script>
+
+        const guertelEmojis = {
+            weiss: '⚪',
+            gelb: '🟡',
+            gruen: '🟢',
+            blau: '🔵',
+            rot: '🔴',
+            schwarz: '⚫'
+        };
+
+        const genderEmojis = {
+            männlich: '👨',
+            weiblich: '👩',
+        };
+
+        function anzeigen() {
+            const anmeldungen = JSON.parse(localStorage.getItem('taekwondoAnmeldungen')) || [];
+            
+            if (anmeldungen.length === 0) {
+                zeigeLeer();
+                updateStatistik(0, 0, 0, 0);
+                return;
+            }
+
+            let stats = { gesamt: 0, poomsae: 0, kyorugi: 0, schwarz: 0 };
+
+            let tabelleHTML = '';
+            let kartenHTML = '';
+
+            for (let i = anmeldungen.length - 1; i >= 0; i--) {
+                const t = anmeldungen[i];
+                stats.gesamt++;
+
+                if (t.disziplin === 'poomsae') stats.poomsae++;
+                else if (t.disziplin === 'kyorugi') stats.kyorugi++;
+                else if (t.disziplin === 'beide') {
+                    stats.poomsae++;
+                    stats.kyorugi++;
+                }
+
+                const isSchwarz = t.guertel.toLowerCase().includes('schwarz');
+                if (isSchwarz) stats.schwarz++;
+
+                const badgeClass = 'badge-' + t.disziplin;
+
+                let guertelEmoji = '⚪';
+                let guertelText = t.guertel;
+                
+                if (isSchwarz) {
+                    guertelEmoji = '⚫';
+                } else {
+                    const ersteWort = t.guertel.split(' ')[0].toLowerCase();
+                    guertelEmoji = guertelEmojis[ersteWort] || '⚪';
+                }
+i
+                const genderEmoji = genderEmojis[t.geschlecht] || '⚪';
+
+                tabelleHTML += `
+                    <tr>
+                        <td><strong>${genderEmoji} ${t.name}</strong></td>
+                        <td>${t.geschlecht}</td>
+                        <td>${t.geburtsdatum}</td>
+                        <td><span class="badge ${badgeClass}">${t.disziplin}</span></td>
+                        <td>${t.gewicht} kg</td>
+                        <td>
+                            <div class="guertel-cell">
+                                <span class="guertel-emoji">${guertelEmoji}</span>
+                                <span>${isSchwarz ? '<span class="badge badge-schwarz">⚫ ' + guertelText + '</span>' : guertelText}</span>
+                            </div>
+                        </td>
+                        <td>${t.verein}</td>
+                        <td>
+                            <button class="delete-btn" onclick="eintragLoeschen(${t.id})" title="Löschen">×</button>
+                        </td>
+                    </tr>
+                `;
+
+                kartenHTML += `
+                    <div class="karte">
+                        <div class="karte-header">
+                            <div class="karte-name">${genderEmoji} ${t.name}</div>
+                            <button class="delete-btn" onclick="eintragLoeschen(${t.id})" title="Löschen">×</button>
+                        </div>
+                        <div class="karte-badges">
+                            <span class="badge ${badgeClass}">${t.disziplin}</span>
+                            ${isSchwarz ? '<span class="badge badge-schwarz">⚫ SCHWARZGURT</span>' : ''}
+                        </div>
+                        <div class="karte-info">
+                            <div class="karte-zeile">
+                                <span class="karte-label">⚧️</span>
+                                <span>${t.geschlecht}</span>
+                            </div>
+                            <div class="karte-zeile">
+                                <span class="karte-label">🎂</span>
+                                <span>${t.geburtsdatum}</span>
+                            </div>
+                            <div class="karte-zeile">
+                                <span class="karte-label">⚖️</span>
+                                <span>${t.gewicht} kg</span>
+                            </div>
+                            <div class="karte-zeile">
+                                <span class="karte-label">${guertelEmoji}</span>
+                                <span>${guertelText}</span>
+                            </div>
+                            <div class="karte-zeile">
+                                <span class="karte-label">🏛️</span>
+                                <span>${t.verein}</span>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }
+
+            document.getElementById('tabelleBody').innerHTML = tabelleHTML;
+            document.getElementById('kartenContainer').innerHTML = kartenHTML;
+
+            updateStatistik(stats.gesamt, stats.poomsae, stats.kyorugi, stats.schwarz);
+        }
+
+        function zeigeLeer() {
+            const leerHTML = `
+                <div class="leer">
+                    <h3>Keine Anmeldungen vorhanden</h3>
+                    <p>Es wurden noch keine Teilnehmer angemeldet.</p>
+                    <p style="margin-top:10px;">Klicke auf "Neue Anmeldung" um loszulegen!</p>
+                </div>
+            `;
+            document.getElementById('tabelleContainer').innerHTML = leerHTML;
+            document.getElementById('kartenContainer').innerHTML = leerHTML;
+        }
+
+        function updateStatistik(gesamt, poomsae, kyorugi, schwarz) {
+            document.getElementById('gesamtAnzahl').textContent = gesamt;
+            document.getElementById('poomsaeAnzahl').textContent = poomsae;
+            document.getElementById('kyorugiAnzahl').textContent = kyorugi;
+            document.getElementById('schwarzAnzahl').textContent = schwarz;
+        }
+
+        function eintragLoeschen(id) {
+            if (confirm('❌ Möchtest du diese Anmeldung wirklich löschen?\n\nDiese Aktion kann nicht rückgängig gemacht werden!')) {
+                let anmeldungen = JSON.parse(localStorage.getItem('taekwondoAnmeldungen')) || [];
+
+                anmeldungen = anmeldungen.filter(function(t) {
+                    return t.id !== id;
+                });
+                
+                localStorage.setItem('taekwondoAnmeldungen', JSON.stringify(anmeldungen));
+
+                location.reload();
+            }
+        }
+
+        function alleLoeschen() {
+            const anzahl = JSON.parse(localStorage.getItem('taekwondoAnmeldungen'))?.length || 0;
+            
+            if (anzahl === 0) {
+                alert('Es gibt keine Anmeldungen zum Löschen.');
+                return;
+            }
+
+            if (confirm(`⚠️ WARNUNG!\n\nDu bist dabei ALLE ${anzahl} Anmeldungen zu löschen.\n\nDies kann NICHT rückgängig gemacht werden!\n\nBist du sicher?`)) {
+                localStorage.removeItem('taekwondoAnmeldungen');
+                location.reload();
+            }
+        }
+
+        window.onload = anzeigen;
+    </script>
+</body>
+</html>
